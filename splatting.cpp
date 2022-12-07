@@ -7,7 +7,7 @@
 //#include "boundary.h"
 #include "particles_nanoflann.h"
 #include <time.h>
-#include <Eigen/Dense>
+#include <eigen3/Eigen/Dense>
 #include "buffer.h"
 using namespace std;
 
@@ -50,7 +50,7 @@ void local_splat(buffer& image, Vec2D point_source, float r, float base_weight){
             if (l < r){
                 float up_w = Green(l, r);
                 //cout << up_w << endl;
-                image.insert_to_col_pixel_adjusted(n,m, up_w);
+                image.insert_to_pois_pixel(n,m, up_w);
             }
         }
     }
@@ -58,7 +58,7 @@ void local_splat(buffer& image, Vec2D point_source, float r, float base_weight){
     //return up_w;
 }
 
-void splat(buffer& image, buffer particles, Vec2D point_source, vector<Segment> segs, float base_weight, int track){
+void splat(buffer& image, buffer particles, Vec2D point_source, Vec2D origin_point, vector<Segment> segs, float base_weight, int track){
     float terminate = random(0.0, 1.0);
     if (track > 10){
         return;
@@ -86,14 +86,14 @@ void splat(buffer& image, buffer particles, Vec2D point_source, vector<Segment> 
     }
     local_splat(image,point_source, r, base_weight);
     track++;
-    for (int h =0; h <5; h++){
+    for (int h =0; h <1; h++){
         float theta = random(0., 2.*M_PI);
         //cout << theta << endl;
         point_source = point_source + Vec2D( (r*cos(theta)), (r*sin(theta)) );
         world_to_pixel(point_source, i, j);
-        base_weight = image.get_col_pixel(i,j);
+        base_weight = image.get_pois_pixel(i,j);
 
-        splat(image, particles, point_source, segs, base_weight, track);
+        splat(image, particles, point_source,origin_point, segs, base_weight, track);
     }
 }
 
@@ -218,16 +218,18 @@ int main( int argc, char** argv ) {
             fill_particles2(particles, scene1, checker);
             Vec2D point_source( (float)i/(float)s, (float)j/(float)s);
             int track = 0;
-    //for (int x = 0; x < 100; x++){
-            splat(map, particles, point_source, scene1, 1.0, track);
-    //}
+    for (int x = 0; x < 20; x++){
+      splat(map, particles, point_source, point_source, scene1, 1.0, track);
+	    map.add_path();
+	    map.clear_pois();
+    }
             //set_value(image, particles, map, i, j);
         //}
     //}
     
+    map.normalize();    
     
-    
-    string file_name = "testing_center_pixel.pfm";
+    string file_name = "testing_center_pixel20_normalize_01kernel.pfm";
     ofstream out(file_name.c_str());
     map.write_to_pfm(out);
     out.close();

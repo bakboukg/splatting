@@ -9,7 +9,7 @@
 #define particles_nanoflann_h
 #include "boundary.h"
 #include "utils.h"
-#include <nanoflann.hpp>
+#include "nanoflann.hpp"
 //#include <nanoflann.hpp>
 #include <set>
 //#include ""
