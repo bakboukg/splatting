@@ -69,7 +69,7 @@ buffer(){
 void insert_to_col_pixel(int i, int j, float col){
     //int i = x*128;
     //int j = y*128;
-    if (i >=54 && i<74 && j>=54 && j<74){
+    if (i >=0 && i<128 && j>=0 && j<128){
       //     pixel_color[i][j] += (pixel_color[i][j]*counter + col)/(counter+1);
       //counter++;
       pixel_color[i][j]+=col;
@@ -98,8 +98,8 @@ void insert_to_col_pixel_adjusted(int i, int j, float col){
 void insert_to_pois_pixel(int i, int j, float w){
    // int i = x*128;
     //int j = y*128;
-    if (i >=54 && i<74 && j>=54 && j<74){
-    pois_norm[i][j] += w;
+    if (i >=0 && i<128 && j>=0 && j<128){
+        pois_norm[i][j] += w;
     }
 }
 

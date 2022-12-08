@@ -33,9 +33,11 @@ float Green(float r, float R){
     return(log (R/(r+EPSILON))/(2.*M_PI));
 }
 
-void local_splat(buffer& image, Vec2D point_source, float r, float base_weight){
+void local_splat(buffer& image, Vec2D point_source, Vec2D origin_point, float r, float base_weight){
     int pixel_r = floor(r*128.0);//min((int)floor(r*128.0), (int)10);
     //cout << pixel_r << endl;
+    int orig_i, orig_j;
+    world_to_pixel(origin_point, orig_i, orig_j);
     int i, j;
     world_to_pixel(point_source, i, j);
         //cout << i  << "   " << j << endl;
@@ -43,14 +45,16 @@ void local_splat(buffer& image, Vec2D point_source, float r, float base_weight){
     //float up_w = updated_weight(r, base_weight);
     for (int n = i - pixel_r; n <= i + pixel_r; n++){
         for (int m = j - pixel_r; m<= j + pixel_r; m++){
-            Vec2D temp;
-            pixel_to_world(n, m, temp);
-            //cout << temp << endl;
-            float l = length(temp - point_source);
-            if (l < r){
-                float up_w = Green(l, r);
-                //cout << up_w << endl;
-                image.insert_to_pois_pixel(n,m, up_w);
+            if (abs(n-orig_i)<5 && abs(m - orig_j)<5){
+                Vec2D temp;
+                pixel_to_world(n, m, temp);
+                //cout << temp << endl;
+                float l = length(temp - point_source);
+                if (l < r){
+                    float up_w = Green(l, r);
+                    //cout << up_w << endl;
+                    image.insert_to_pois_pixel(n,m, up_w);
+                }
             }
         }
     }
@@ -229,7 +233,7 @@ int main( int argc, char** argv ) {
     
     map.normalize();    
     
-    string file_name = "testing_center_pixel20_normalize_02kernel.pfm";
+    string file_name = "testing_center_pixel20_normalize_new_kernel.pfm";
     ofstream out(file_name.c_str());
     map.write_to_pfm(out);
     out.close();
