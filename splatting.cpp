@@ -122,7 +122,7 @@ vector<Segment> scene = {
 
 float solve( Vec2D x0, vector<Segment> segments, function<float(Vec2D)> g, buffer& particles){
     const float eps = EPSILON;//0.01; // stopping tolerance
-   const int nWalks = 1; // number of Monte Carlo samples
+   const int nWalks = 100; // number of Monte Carlo samples
    const int maxSteps = 16; // maximum walk length
     Vec2D SPOINT;
    float sum = 0.;
@@ -232,7 +232,7 @@ int main( int argc, char** argv ) {
     
       
     
-    string file_name = "comp_test_new_kernel1_4x4.pfm";
+    string file_name = "comp_test_new_kernel1_4x4_accurate.pfm";
     ofstream out(file_name.c_str());
     image.write_to_pfm(out);
     out.close();
