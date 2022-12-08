@@ -88,7 +88,7 @@ void splat(buffer& image, buffer particles, Vec2D point_source, Vec2D origin_poi
     if( base_weight < 10*EPSILON){
         return;
     }
-    local_splat(image,point_source, r, base_weight);
+    local_splat(image,point_source,origin_point, r, base_weight);
     track++;
     for (int h =0; h <1; h++){
         float theta = random(0., 2.*M_PI);
