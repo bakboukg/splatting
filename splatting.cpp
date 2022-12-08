@@ -219,7 +219,7 @@ int main( int argc, char** argv ) {
             buffer map;
             Vec2D point_source( (float)i/(float)s, (float)j/(float)s);
             int track = 0;
-            for (int x = 0; x < 20; x++){
+            for (int x = 0; x < 200; x++){
               splat(map, particles, point_source, point_source, scene1, 1.0, track);
                 map.add_path();
                 map.clear_pois();
@@ -232,7 +232,7 @@ int main( int argc, char** argv ) {
     
       
     
-    string file_name = "comp_test_new_kernel_free_accurate.pfm";
+    string file_name = "comp_test_new_more_splat_kernel_free_accurate.pfm";
     ofstream out(file_name.c_str());
     image.write_to_pfm(out);
     out.close();
