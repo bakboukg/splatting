@@ -229,7 +229,7 @@ int main( int argc, char** argv ) {
     
     map.normalize();    
     
-    string file_name = "testing_center_pixel20_normalize_01kernel.pfm";
+    string file_name = "testing_center_pixel20_normalize_02kernel.pfm";
     ofstream out(file_name.c_str());
     map.write_to_pfm(out);
     out.close();
