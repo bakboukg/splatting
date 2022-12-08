@@ -208,32 +208,31 @@ void set_value(buffer& image, buffer particles, buffer map, int i, int j){
 int main( int argc, char** argv ) {
     srand( time(NULL) );
    
-    
+    buffer particles;
+    fill_particles2(particles, scene1, checker);
     
     
     buffer image;
     int s = 128;
-    //for(int i =0; i < 128; i++){
-      //  for (int j =0; j < 128; j++){
-    int i = 64;
-    int j = 64;
+    for(int i =0; i < 128; i++){
+        for (int j =0; j < 128; j++){
             buffer map;
-            buffer particles;
-            fill_particles2(particles, scene1, checker);
             Vec2D point_source( (float)i/(float)s, (float)j/(float)s);
             int track = 0;
-    for (int x = 0; x < 20; x++){
-      splat(map, particles, point_source, point_source, scene1, 1.0, track);
-	    map.add_path();
-	    map.clear_pois();
+            for (int x = 0; x < 20; x++){
+              splat(map, particles, point_source, point_source, scene1, 1.0, track);
+                map.add_path();
+                map.clear_pois();
+            }
+        
+    
+            set_value(image, particles, map, i, j);
+        }
     }
-            //set_value(image, particles, map, i, j);
-        //}
-    //}
     
     map.normalize();    
     
-    string file_name = "testing_center_pixel20_normalize_new_kernel.pfm";
+    string file_name = "comp_test_new_kernel_4x4.pfm";
     ofstream out(file_name.c_str());
     map.write_to_pfm(out);
     out.close();
