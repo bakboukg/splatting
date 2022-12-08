@@ -183,9 +183,9 @@ float checker( Vec2D x ) {
 void set_value(buffer& image, buffer particles, buffer map, int i, int j){
     float sum = 0.0;
     float weights = 0.0;
-    for (int n =-5; n < 5; n++){
-        for (int m = -5; m < 5; m++){
-            sum+= particles.get_col_pixel(i+n,j+m)*map.get_col_pixel(i+n,j+m);
+    for (int n =0; n < 128; n++){
+        for (int m = 0; m < 128; m++){
+            sum+= particles.get_col_pixel(n,m)*map.get_col_pixel(n,m);
             //cout << map.get_pois_pixel(n,m) << endl;
            // weights+=map.get_pois_pixel(i+n,j+m);
         }
@@ -232,7 +232,7 @@ int main( int argc, char** argv ) {
     
       
     
-    string file_name = "comp_test_new_kernel_4x4.pfm";
+    string file_name = "comp_test_new_kernel1_4x4.pfm";
     ofstream out(file_name.c_str());
     image.write_to_pfm(out);
     out.close();
