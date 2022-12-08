@@ -224,13 +224,13 @@ int main( int argc, char** argv ) {
                 map.add_path();
                 map.clear_pois();
             }
-        
+            map.normalize();  
     
             set_value(image, particles, map, i, j);
         }
     }
     
-    map.normalize();    
+      
     
     string file_name = "comp_test_new_kernel_4x4.pfm";
     ofstream out(file_name.c_str());
