@@ -45,7 +45,7 @@ void local_splat(buffer& image, Vec2D point_source, Vec2D origin_point, float r,
     //float up_w = updated_weight(r, base_weight);
     for (int n = i - pixel_r; n <= i + pixel_r; n++){
         for (int m = j - pixel_r; m<= j + pixel_r; m++){
-            if (abs(n-orig_i)<10 && abs(m - orig_j)<10){
+            //if (abs(n-orig_i)<10 && abs(m - orig_j)<10){
                 Vec2D temp;
                 pixel_to_world(n, m, temp);
                 //cout << temp << endl;
@@ -55,7 +55,7 @@ void local_splat(buffer& image, Vec2D point_source, Vec2D origin_point, float r,
                     //cout << up_w << endl;
                     image.insert_to_pois_pixel(n,m, up_w);
                 }
-            }
+            //}
         }
     }
     //cout << up_w << endl;
@@ -232,7 +232,7 @@ int main( int argc, char** argv ) {
     
       
     
-    string file_name = "comp_test_new_kernel1_9x9_accurate.pfm";
+    string file_name = "comp_test_new_kernel_free_accurate.pfm";
     ofstream out(file_name.c_str());
     image.write_to_pfm(out);
     out.close();
