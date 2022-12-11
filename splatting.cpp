@@ -45,7 +45,7 @@ void local_splat(buffer& image, Vec2D point_source, Vec2D origin_point, float r,
     //float up_w = updated_weight(r, base_weight);
     for (int n = i - pixel_r; n <= i + pixel_r; n++){
         for (int m = j - pixel_r; m<= j + pixel_r; m++){
-            if (abs(n-orig_i)<3 && abs(m - orig_j)<3){
+            if (abs(n-orig_i)<10 && abs(m - orig_j)<10){
                 Vec2D temp;
                 pixel_to_world(n, m, temp);
                 //cout << temp << endl;
@@ -186,8 +186,8 @@ float checker( Vec2D x ) {
 void set_value(buffer& image, buffer particles, buffer map, int i, int j){
     float sum = 0.0;
     float weights = 0.0;
-    for (int n =-3; n < 3; n++){
-        for (int m = -3; m < 3; m++){
+    for (int n =-10; n < 10; n++){
+        for (int m = -10; m < 10; m++){
             sum+= particles.get_col_pixel(i+n,j+m)*map.get_col_pixel(i+n,j+m);
             //cout << map.get_pois_pixel(n,m) << endl;
            // weights+=map.get_pois_pixel(i+n,j+m);
@@ -235,7 +235,7 @@ int main( int argc, char** argv ) {
     
       
     
-    string file_name = "comp_test_7x7_p25.pfm";
+    string file_name = "comp_test_21x21_p25.pfm";
     ofstream out(file_name.c_str());
     image.write_to_pfm(out);
     out.close();
