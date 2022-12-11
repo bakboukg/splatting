@@ -164,12 +164,15 @@ void fill_particles2(buffer& particles, vector<Segment> segments, function<float
     for (int i = 0; i < 128; i++){
         for (int j = 0; j < 128; j++){
             float x = random(0.0, 1.0);
-
-        Vec2D point((float)i/(float)s, (float)j/(float)s);
-        float u = solve(point, segments, g, particles);
-        int n, m;
-        world_to_pixel(point, n, m);
-        particles.insert_to_col_pixel_particle(n, m, u);
+            if ( x > 0.5)
+            {
+                Vec2D point((float)i/(float)s, (float)j/(float)s);
+                float u = solve(point, segments, g, particles);
+                int n, m;
+                world_to_pixel(point, n, m);
+                particles.insert_to_col_pixel_particle(n, m, u);
+            }
+        
     }
     }
     
@@ -183,8 +186,8 @@ float checker( Vec2D x ) {
 void set_value(buffer& image, buffer particles, buffer map, int i, int j){
     float sum = 0.0;
     float weights = 0.0;
-    for (int n =0; n < 128; n++){
-        for (int m = 0; m < 128; m++){
+    for (int n =-3; n < 3; n++){
+        for (int m = -3; m < 3; m++){
             sum+= particles.get_col_pixel(n,m)*map.get_col_pixel(n,m);
             //cout << map.get_pois_pixel(n,m) << endl;
            // weights+=map.get_pois_pixel(i+n,j+m);
@@ -232,7 +235,7 @@ int main( int argc, char** argv ) {
     
       
     
-    string file_name = "comp_test_new_more_splat_kernel_free_accurate.pfm";
+    string file_name = "comp_test_7x7_p5.pfm";
     ofstream out(file_name.c_str());
     image.write_to_pfm(out);
     out.close();
