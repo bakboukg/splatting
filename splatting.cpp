@@ -188,7 +188,7 @@ void set_value(buffer& image, buffer particles, buffer map, int i, int j){
     float weights = 0.0;
     for (int n =-3; n < 3; n++){
         for (int m = -3; m < 3; m++){
-            sum+= particles.get_col_pixel(n,m)*map.get_col_pixel(n,m);
+            sum+= particles.get_col_pixel(i+n,j+m)*map.get_col_pixel(i+n,j+m);
             //cout << map.get_pois_pixel(n,m) << endl;
            // weights+=map.get_pois_pixel(i+n,j+m);
         }
