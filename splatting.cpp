@@ -164,7 +164,7 @@ void fill_particles2(buffer& particles, vector<Segment> segments, function<float
     for (int i = 0; i < 128; i++){
         for (int j = 0; j < 128; j++){
             float x = random(0.0, 1.0);
-            if ( x > 0.5)
+            if ( x > 0.75)
             {
                 Vec2D point((float)i/(float)s, (float)j/(float)s);
                 float u = solve(point, segments, g, particles);
@@ -235,7 +235,7 @@ int main( int argc, char** argv ) {
     
       
     
-    string file_name = "comp_test_7x7_p5.pfm";
+    string file_name = "comp_test_7x7_p25.pfm";
     ofstream out(file_name.c_str());
     image.write_to_pfm(out);
     out.close();
