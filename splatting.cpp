@@ -211,7 +211,7 @@ void set_value(buffer& image, buffer particles, buffer map, int i, int j){
     //if (weights > EPSILON){
       //  sum /= weights;
     //}
-    image.insert_to_col_pixel_adjusted(i, j, sum);
+    image.insert_to_col_pixel_adjusted(i, j, sum/weights);
     //image.insert_to_col_pixel(i, j, sum/weights);
     
 }
