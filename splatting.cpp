@@ -211,15 +211,15 @@ void set_value(buffer& image, buffer particles, buffer map, int i, int j){
     //if (weights > EPSILON){
       //  sum /= weights;
     //}
-    image.insert_to_col_pixel_adjusted(i, j, sum/weights);
-    //image.insert_to_col_pixel(i, j, sum/weights);
+    //image.insert_to_col_pixel_adjusted(i, j, sum/weights);
+    image.insert_to_col_pixel(i, j, sum/weights);
     
 }
 
 int main( int argc, char** argv ) {
     srand( time(NULL) );
    
-    buffer particles;
+    buffer particles(-1.0);
     fill_particles2(particles, scene1, checker);
     
     
