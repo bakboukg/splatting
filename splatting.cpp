@@ -217,9 +217,11 @@ void set_value(buffer& image, buffer particles, buffer map, int i, int j){
         cout << "weights: " << weights << endl;
         cout << "sum: "     << sum     << endl;
         cout << endl << endl;
+        image.insert_to_col_pixel(i, j, 0.0);
     }
-    image.insert_to_col_pixel(i, j, sum/weights);
-    
+    else{
+        image.insert_to_col_pixel(i, j, sum/weights);
+    }
 }
 
 int main( int argc, char** argv ) {
