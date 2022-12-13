@@ -192,6 +192,8 @@ void set_value(buffer& image, buffer particles, buffer map, int i, int j){
             if (value > -1.0){
                 sum+= value*map.get_col_pixel(i+n,j+m);
                 weights+=map.get_col_pixel(i+n,j+m);
+                cout << map.get_col_pixel(i+n,j+m)<< endl;
+
             }
             
             //cout << map.get_pois_pixel(n,m) << endl;
