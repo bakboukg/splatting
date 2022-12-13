@@ -196,6 +196,7 @@ void set_value(buffer& image, buffer particles, buffer map, int i, int j){
 
             }
             
+            
             //cout << map.get_pois_pixel(n,m) << endl;
            // weights+=map.get_pois_pixel(i+n,j+m);
         }
@@ -212,7 +213,11 @@ void set_value(buffer& image, buffer particles, buffer map, int i, int j){
       //  sum /= weights;
     //}
     //image.insert_to_col_pixel_adjusted(i, j, sum/weights);
-    cout << weights << endl;
+    if (weights < EPSILON || sum < EPSILON){
+        cout << "weights: " << weights << endl;
+        cout << "sum: "     << sum     << endl;
+        cout << endl << endl;
+    }
     image.insert_to_col_pixel(i, j, sum/weights);
     
 }
