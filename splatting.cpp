@@ -188,7 +188,12 @@ void set_value(buffer& image, buffer particles, buffer map, int i, int j){
     float weights = 0.0;
     for (int n =-10; n < 10; n++){
         for (int m = -10; m < 10; m++){
-            sum+= particles.get_col_pixel(i+n,j+m)*map.get_col_pixel(i+n,j+m);
+            float value =  particles.get_col_pixel(i+n,j+m);
+            if (value > -1.0){
+                sum+= value*map.get_col_pixel(i+n,j+m);
+                weights+=map.get_pois_pixel(i+n,j+m);
+            }
+            
             //cout << map.get_pois_pixel(n,m) << endl;
            // weights+=map.get_pois_pixel(i+n,j+m);
         }
@@ -204,7 +209,8 @@ void set_value(buffer& image, buffer particles, buffer map, int i, int j){
     //if (weights > EPSILON){
       //  sum /= weights;
     //}
-    image.insert_to_col_pixel_adjusted(i, j, sum);
+    //image.insert_to_col_pixel_adjusted(i, j, sum);
+    image.insert_to_col_pixel(i, j, sum/weights);
     
 }
 
@@ -227,7 +233,7 @@ int main( int argc, char** argv ) {
                 map.add_path();
                 map.clear_pois();
             }
-            map.normalize();
+           // map.normalize();
     
             set_value(image, particles, map, i, j);
         }

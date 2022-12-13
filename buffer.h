@@ -24,7 +24,7 @@ public:
 buffer(){
     for (unsigned int i=0; i< 128; i++){
         for (unsigned int j=0; j<128; j++){
-            pixel_color[i][j] = 0.0;
+            pixel_color[i][j] = -1.0;
             pois_norm[i][j] = 0.0;
         }
     }
@@ -51,7 +51,7 @@ buffer(){
 
   }
 
-  void normalize(){
+  void normalize(int size){
     float sum = 0;
    for (unsigned int i=0; i< 128; i++){
      for (unsigned int j=0; j<128; j++){
