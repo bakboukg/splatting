@@ -31,7 +31,7 @@ buffer(){
     std::cout << "Buffer defined" << std::endl;
 }
 
-    buffer_parts(float init){
+    buffer(float init){
         for (unsigned int i=0; i< 128; i++){
             for (unsigned int j=0; j<128; j++){
                 pixel_color[i][j] = init;
