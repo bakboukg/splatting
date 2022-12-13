@@ -28,7 +28,7 @@ buffer(){
             pois_norm[i][j] = 0.0;
         }
     }
-    std::cout << "Buffer defined" << std::endl;
+   // std::cout << "Buffer defined" << std::endl;
 }
 
     buffer(float init){
@@ -38,7 +38,7 @@ buffer(){
                 pois_norm[i][j] = 0.0;
             }
         }
-        std::cout << "Particles buffer defined" << std::endl;
+     //   std::cout << "Particles buffer defined" << std::endl;
     }
 
   void clear_pois(){
